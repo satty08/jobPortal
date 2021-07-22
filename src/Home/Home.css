@@ -1,0 +1,45 @@
+.home{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.auth{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    padding: 30px 50px;
+    border-radius: 19px;
+    background-color: rgb(255, 196, 173);
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login button{
+    background-color: lightgreen;
+}
+
+input{
+    padding: 10px;
+    border-radius: 9px;
+    border: none;
+    background-color: rgb(231, 231, 231);
+    margin: 10px;
+}
+
+button{
+    padding: 10px;
+    font-size: 15px;
+    max-width: 200px;
+    border-radius: 19px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}

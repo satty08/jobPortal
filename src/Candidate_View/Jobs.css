@@ -1,0 +1,12 @@
+.jobs{
+    border: none;
+    width: 600px;
+    margin: 20px;
+    background-color: rgb(209, 234, 250);
+    border-radius: 19px;
+}
+
+.jobSection{
+    display: flex;
+    justify-content: center;
+}

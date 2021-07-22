@@ -1,0 +1,8 @@
+.jobsTemplate{
+    border: none;
+    width: 600px;
+    margin: 20px;
+    background-color: rgb(255, 203, 203);
+    border-radius: 19px;
+    padding: 10px;
+}
