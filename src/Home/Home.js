@@ -11,6 +11,10 @@ function Home() {
         history.push('/candidate/jobs')
     }
 
+    const signup = () => {
+        history.push('/recruiter')
+    }
+
     return (
         <div className="home">
             <div className="welcome">
@@ -36,7 +40,7 @@ function Home() {
                         <input type="email" placeholder="Enter your Email"/>
                         <label htmlFor="">Password</label>
                         <input type="password" name="" id="" placeholder="Enter your password"/>
-                        <button type="submit">Submit</button>
+                        <button type="submit" onClick={signup}>Submit</button>
                 </div>}
                 {!show ? <h3>Don't have an account <button onClick={() => setShow(!show)}>click here</button></h3>
                 :
