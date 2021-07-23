@@ -17,6 +17,7 @@ function JobPost(props) {
             'Salary': salary,
             'location': location,
         })
+        props.close();
     }
 
     if(!props.show){
