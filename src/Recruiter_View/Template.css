@@ -1,0 +1,8 @@
+.template{
+    margin: 10px;
+    background-color: rgb(253, 182, 253);
+    border-radius: 9px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}

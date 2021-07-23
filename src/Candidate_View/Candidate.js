@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Candidate.css';
 import Jobs from './Jobs';
+import { db } from '../firebase';
 
 function Candidate(props) {
+
+    const[jobs, setJobs] = useState([]);
+
+    useEffect(() => {
+        db.collection('job posts').onSnapshot(snapshot => {
+            setJobs(snapshot.docs.map(doc => ({
+                id: doc.id,
+                data: doc.data()
+            })
+            ))
+        })
+    }, [jobs])
+
     return (
         <div className="candidate"> 
             <div className="details">
@@ -10,34 +24,15 @@ function Candidate(props) {
                 <h2>Email: {props.email}</h2>
             </div>
             <div className="jobList">
-                <Jobs 
-                title="SDE1"
-                desc="This is a SDE Job"
-                salary="2000000"
-                location="Gurgaon"
-                id='1'
-                />
-                <Jobs 
-                title="SDE1"
-                desc="This is a SDE Job"
-                salary="2000000"
-                location="Gurgaon"
-                id='2'
-                />
-                <Jobs 
-                title="SDE1"
-                desc="This is a SDE Job"
-                salary="2000000"
-                location="Gurgaon"
-                id="3"
-                />
-                <Jobs 
-                title="SDE1"
-                desc="This is a SDE Job"
-                salary="2000000"
-                location="Gurgaon"
-                id="4"
-                />
+                {jobs?.map(job => (<Jobs 
+                title={job.data.Title}
+                desc={job.data.Desc}
+                salary={job.data.Salary}
+                location={job.data.location}
+                id={job.id}
+                key={job.id}
+                />))}
+                
             </div>
         </div>
     )

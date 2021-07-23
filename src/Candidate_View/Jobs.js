@@ -15,7 +15,7 @@ function Jobs(props) {
             <p>{props.desc}</p>
             <p>Compensation: {props.salary}          Location: {props.location}</p>
             <button onClick={() => setShow(!show)}>Apply</button>
-            <ApplyModal close={() => setShow(false)} show={show} />
+            <ApplyModal id={props.id} close={() => setShow(false)} show={show} />
         </div>
         <div className="rightPanel"></div>
         </div>
