@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Home.css';
 import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css'
+import 'react-dropdown/style.css';
+import { auth } from '../firebase';
 
 function Home() {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
     const history = useHistory();
 
     const[show, setShow] = useState(false);
@@ -18,19 +23,37 @@ function Home() {
         else if(value.value === 'Jobseeker')
             setAns('Jobseeker')
 
-        console.log(ans);
-
         return ans
     }
 
+    const signup = () => {
+        if(ans === 'Jobseeker'){
+            auth.createUserWithEmailAndPassword(email, password).then(e => {
+                history.push('/candidate/jobs')
+            })
+            .catch(err => console.log(err))
+            
+        }
+        else if(ans === 'Recruiter'){
+            auth.createUserWithEmailAndPassword(email, password).then(e => {
+            history.push('/recruiter')
+        }).catch(err => console.log(err))
+        }
+    }
 
     const login = () => {
-        if(ans === 'Jobseeker')
-            history.push('/candidate/jobs')
-        else if(ans === 'Recruiter')
+        if(ans === 'Jobseeker'){
+            auth.signInWithEmailAndPassword(email, password).then(e => {
+                history.push('/candidate/jobs')
+            })
+            .catch(err => console.log(err))
+            
+        }
+        else if(ans === 'Recruiter'){
+            auth.signInWithEmailAndPassword(email, password).then(e => {
             history.push('/recruiter')
-
-        console.log(ans);
+        }).catch(err => console.log(err))
+        }
     }
 
     return (
@@ -45,9 +68,9 @@ function Home() {
                 {!show ? <div className="login" hidden={show}>
                     
                         <label htmlFor="">Email</label>
-                        <input type="email" placeholder="Enter your Email" required={true}/>
+                        <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter your Email" required={true}/>
                         <label htmlFor="">Password</label>
-                        <input type="password" name="" id="" placeholder="Enter your password" required={true}/>
+                        <input type="password" onChange={(e) => setPassword(e.target.value)} name="" id="" placeholder="Enter your password" required={true}/>
                         <p> Who are you: <Dropdown options={options} value={ans} onChange={selectHandler} placeholder="Select an option" />
                         </p>
                         <button type="submit" onClick={login}>Submit</button>
@@ -57,12 +80,12 @@ function Home() {
                         <label htmlFor="">Name</label>
                         <input type="text" name="" id="" placeholder="Enter your name" required={true} />
                         <label htmlFor="">Email</label>
-                        <input type="email" placeholder="Enter your Email" required={true}/>
+                        <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter your Email" required={true}/>
                         <label htmlFor="">Password</label>
-                        <input type="password" name="" id="" placeholder="Enter your password" required={true}/>
+                        <input type="password" onChange={(e) => setPassword(e.target.value)} name="" id="" placeholder="Enter your password" required={true}/>
                         <p> Who are you: <Dropdown options={options} value={ans} onChange={e => setAns(e.value)} placeholder="Select an option" />
                         </p>
-                        <button type="submit" onClick={login}>Submit</button>
+                        <button type="submit" onClick={signup}>Submit</button>
                 </div>}
                 {!show ? <h3>Don't have an account <button onClick={() => setShow(!show)}>click here</button></h3>
                 :

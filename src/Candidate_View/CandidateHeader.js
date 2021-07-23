@@ -1,11 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './CandidateHeader.css';
+import { auth } from '../firebase';
 
 function CandidateHeader() {
     const history = useHistory()
     const logout = () => {
-        history.push('/')
+        auth.signOut().then(() => {
+            history.push('/')
+        })
     }
 
     return (

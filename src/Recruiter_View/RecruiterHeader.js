@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import './RecruiterHeader.css';
 import JobPost from './JobPost';
 import { useHistory } from 'react-router-dom';
+import { auth } from '../firebase';
 
 function RecruiterHeader() {
     const[show, setShow] = useState(false);
-    const history = useHistory();
-
+    const history = useHistory()
     const logout = () => {
-        history.push('/')
+        auth.signOut().then(() => {
+            history.push('/')
+        })
     }
     return (
         <div className="header">
